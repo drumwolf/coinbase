@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<head>
+    <title>-- cryptocurrency prices --</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<script type="text/javascript">
+
+const coins  = ['BTC', 'BCH', 'ETH', 'LTC'];
+
+coins.forEach( coinType => {
+    const url = 'https://api.coinbase.com/v2/prices/' + coinType + '-USD/sell'
+    fetch(url).then( data => data.json() ).then( json => console.log(coinType, json) )
+});
+
+</script>
+
+</body>
+</html>
