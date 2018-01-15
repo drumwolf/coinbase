@@ -14,10 +14,14 @@ const gsxURL = `https://spreadsheets.google.com/feeds/list/${gsxID}/default/publ
 
 coins.forEach( coinType => {
     const url = 'https://api.coinbase.com/v2/prices/' + coinType + '-USD/sell'
-    fetch(url).then( data => data.json() ).then( json => console.log(coinType, json) )
+    fetchJSON(url, (json => console.log(coinType, json)) );
 });
 
-fetch(gsxURL).then( data => data.json() ).then( json => console.log(json) );
+fetchJSON(gsxURL, (json => console.log(json.feed.entry)) );
+
+function fetchJSON(url, JSONCallback) {
+    fetch(url).then( data => data.json() ).then( JSONCallback );
+}
 
 </script>
 
