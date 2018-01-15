@@ -6,14 +6,21 @@ class CoinPrices {
 
         coins.forEach( coinType => {
             const url = 'https://api.coinbase.com/v2/prices/' + coinType + '-USD/sell'
-            fetchJSON(url, (json => console.log(coinType, json)) );
+            this.fetchJSON(url, this.setCoinData );
         });
+        this.fetchJSON(gsxURL, this.setGSXData);
+    }
 
-        fetchJSON(gsxURL, (json => console.log(json.feed.entry)) );
+    fetchJSON(url, JSONCallback) {
+        fetch(url).then( data => data.json() ).then( JSONCallback );
+    }
 
-        function fetchJSON(url, JSONCallback) {
-            fetch(url).then( data => data.json() ).then( JSONCallback );
-        }
+    setCoinData(json) {
+        console.log(json)
+    }
+
+    setGSXData(json) {
+        console.log(json.feed.entry);
     }
 }
 
